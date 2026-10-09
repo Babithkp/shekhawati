@@ -33,7 +33,7 @@
     { id: "che", city: "Chennai", state: "Tamil Nadu", lat: 13.16, lon: 80.20, side: "right",
       addr: "No. 242/241, 22nd Cross Street, Sakthivel Nagar Main Road, Puzhal, Chennai 600066", phones: ["8122570776"] },
   ];
-  const fmtPhone = (p) => `${p.slice(0, 5)} ${p.slice(5)}`;
+  const fmtPhone = (p) => `+91 ${p}`;
 
   /* ---------- Image skeletons ---------- */
   $$(".skeleton").forEach((wrap) => {
@@ -115,23 +115,6 @@
     if (en.isIntersecting) spyLinks.forEach((a) => a.removeAttribute("aria-current"));
   }, { rootMargin: "-45% 0px -50% 0px" });
   heroIO.observe($("#top"));
-
-  /* ---------- Dispatch board ---------- */
-  const rows = $$("#board li");
-  let rowIdx = 0;
-  const clock = $("#clock");
-  const fmtTime = new Intl.DateTimeFormat("en-IN", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "Asia/Kolkata" });
-  const updateClock = () => { clock.textContent = `IST ${fmtTime.format(new Date())}`; };
-  updateClock();
-  setInterval(updateClock, 15000);
-  if (rows.length) {
-    rows[0].classList.add("is-active");
-    if (!reduceMotion) setInterval(() => {
-      rows[rowIdx].classList.remove("is-active");
-      rowIdx = (rowIdx + 1) % rows.length;
-      rows[rowIdx].classList.add("is-active");
-    }, 2200);
-  }
 
   /* ---------- Client marquee: duplicate for a seamless loop ---------- */
   const track = $(".marquee__track");
@@ -358,7 +341,7 @@
         btn.classList.remove("is-loading"); btn.disabled = false;
         $("span", btn).textContent = "Get a freight quote";
         status.classList.add("is-ok");
-        status.innerHTML = 'Your email app is opening with the request filled in. If nothing opens, call <a class="mono" href="tel:+919008898260">90088 98260</a> or write to <a href="mailto:bng@shekhawatilogistics.com">bng@shekhawatilogistics.com</a>.';
+        status.innerHTML = 'Your email app is opening with the request filled in. If nothing opens, call <a class="mono" href="tel:+919008898260">+91 9008898260</a> or write to <a href="mailto:bng@shekhawatilogistics.com">bng@shekhawatilogistics.com</a>.';
       }, 700);
     });
   }
