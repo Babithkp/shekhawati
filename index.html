@@ -112,9 +112,18 @@
       </div>
 
       <figure class="container hero__media reveal">
-        <div class="media-frame skeleton">
-          <img src="assets/img/hero-odc.jpg" alt="A large cylindrical vessel shell loaded on a multi axle trailer for an over dimensional move" width="1600" height="603" fetchpriority="high">
-          <figcaption class="media-tag"><i class="ph ph-crane" aria-hidden="true"></i>Project cargo · Over dimensional consignment</figcaption>
+        <div class="media-frame skeleton carousel" id="heroCarousel">
+          <div class="carousel__slides">
+            <img class="carousel__slide is-active" src="assets/img/hero_1.png" alt="An Ashok Leyland low bed trailer hauling a heavy earth mover" width="1600" height="603" fetchpriority="high" data-caption="Heavy earth movers on multi axle low beds">
+            <img class="carousel__slide" src="assets/img/hero_2.png" alt="A mobile crushing plant loaded on a low bed trailer on the highway" width="1600" height="603" loading="lazy" data-caption="Mobile crushing plants, moved across state lines">
+            <img class="carousel__slide" src="assets/img/Nighttime Industrial Crusher Transport Yard.png" alt="A crusher unit being loaded onto a trailer at a yard at night" width="1600" height="603" loading="lazy" data-caption="Round the clock dispatch, loaded and ready">
+          </div>
+          <figcaption class="media-tag"><i class="ph ph-crane" aria-hidden="true"></i><span id="heroCarouselCaption">Heavy earth movers on multi axle low beds</span></figcaption>
+          <div class="carousel__dots" role="tablist" aria-label="Hero image carousel">
+            <button class="carousel__dot is-active" type="button" role="tab" aria-selected="true" aria-label="Show slide 1"></button>
+            <button class="carousel__dot" type="button" role="tab" aria-selected="false" aria-label="Show slide 2"></button>
+            <button class="carousel__dot" type="button" role="tab" aria-selected="false" aria-label="Show slide 3"></button>
+          </div>
         </div>
       </figure>
 
@@ -197,7 +206,7 @@
           <li class="benefit reveal">
             <i class="ph ph-crane-tower benefit__icon" aria-hidden="true"></i>
             <h3>ODC and container specialists</h3>
-            <p>A proven record with reactors, boilers, transformers and secure containerised&nbsp;cargo.</p>
+            <p>A proven record with heavy earth movers, transformers and secure containerised&nbsp;cargo.</p>
           </li>
           <li class="benefit reveal">
             <i class="ph ph-clock-countdown benefit__icon" aria-hidden="true"></i>
@@ -268,11 +277,11 @@
 
         <div class="sectors">
           <article class="sector sector--wide reveal">
-            <div class="sector__media skeleton"><img src="assets/img/fleet-lowbed-reactor.jpg" alt="A long steel reactor vessel strapped to a hydraulic low bed trailer" loading="lazy"></div>
+            <div class="sector__media skeleton"><img src="assets/img/low_earth.png" alt="A heavy earth mover strapped to a hydraulic low bed trailer" loading="lazy"></div>
             <div class="sector__body">
               <span class="chip"><i class="ph ph-factory" aria-hidden="true"></i>Projects and ODC</span>
-              <h3>Reactors, boilers and transformers, right up to remote&nbsp;sites</h3>
-              <p>We have completed project moves for reactors, boilers, transformers, wagons and heavy machinery. Where the road ends, we build temporary access roads and offload with modern handling equipment and skilled&nbsp;labour.</p>
+              <h3>Heavy earth movers and transformers, right up to remote&nbsp;sites</h3>
+              <p>We have completed project moves for heavy earth movers, transformers, wagons and heavy machinery. Where the road ends, we build temporary access roads and offload with modern handling equipment and skilled&nbsp;labour.</p>
             </div>
           </article>
 
@@ -335,15 +344,15 @@
           <p>Secure, weatherproof transport for sensitive&nbsp;cargo.</p>
         </li>
         <li class="truck reveal">
-          <div class="truck__media skeleton"><img src="assets/img/fleet-trailer-40.jpg" alt="A 40 FT flatbed trailer with its tractor head" loading="lazy"></div>
+          <div class="truck__media skeleton"><img src="assets/img/40ftimg.png" alt="A 40 FT flatbed trailer with its tractor head" loading="lazy"></div>
           <div class="truck__meta mono"><span>Class D</span><span>40 FT</span></div>
           <h3>40 FT trailer</h3>
           <p>Standard heavy duty haulage for bulk&nbsp;cargo.</p>
         </li>
         <li class="truck reveal">
-          <div class="truck__media skeleton"><img src="assets/img/fleet-odc-night.jpg" alt="A long trailer carrying a large vessel at night" loading="lazy"></div>
-          <div class="truck__meta mono"><span>Class E</span><span>50 and 60 FT</span></div>
-          <h3>50 FT and 60 FT trailers</h3>
+          <div class="truck__media skeleton"><img src="assets/img/Lowbed.png" alt="A long trailer carrying a large vessel at night" loading="lazy"></div>
+          <div class="truck__meta mono"><span>Class E</span><span>Low Bed </span></div>
+          <h3>Low Bed Trailers</h3>
           <p>High capacity movement for large volume&nbsp;consignments.</p>
         </li>
         <li class="truck reveal">
@@ -409,7 +418,7 @@
           </details>
           <details class="reveal">
             <summary>Can you move over dimensional cargo?<i class="ph ph-plus" aria-hidden="true"></i></summary>
-            <div class="faq__a"><p>Yes. ODC and project cargo is a core specialty. We have moved reactors, boilers, transformers, wagons and heavy machinery on low beds and multi axle trailers, including to remote sites where we build temporary roads for access.</p></div>
+            <div class="faq__a"><p>Yes. ODC and project cargo is a core specialty. We have moved heavy earth movers, transformers, wagons and heavy machinery on low beds and multi axle trailers, including to remote sites where we build temporary roads for access.</p></div>
           </details>
           <details class="reveal">
             <summary>Which vehicle sizes do you run?<i class="ph ph-plus" aria-hidden="true"></i></summary>
@@ -467,6 +476,11 @@
             <h3 id="quote-title">Get a freight quote</h3>
             <span class="mono quote__badge"><i class="ph ph-seal-check" aria-hidden="true"></i>Free, no obligation</span>
           </div>
+
+          <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+          <input type="hidden" name="subject" value="New freight quote request — Shekhawati Logistics">
+          <input type="hidden" name="from_name" value="Shekhawati Logistics website">
+          <input type="checkbox" name="botcheck" class="hidden" style="display:none">
 
           <div class="field-row">
             <div class="field">

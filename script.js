@@ -44,6 +44,43 @@
     else { img.addEventListener("load", done, { once: true }); img.addEventListener("error", done, { once: true }); }
   });
 
+  /* ---------- Hero carousel ---------- */
+  const heroCarousel = $("#heroCarousel");
+  if (heroCarousel) {
+    const slides = $$(".carousel__slide", heroCarousel);
+    const dots = $$(".carousel__dot", heroCarousel);
+    const caption = $("#heroCarouselCaption");
+    let active = 0;
+    let timer = null;
+
+    const show = (index) => {
+      active = (index + slides.length) % slides.length;
+      slides.forEach((s, i) => s.classList.toggle("is-active", i === active));
+      dots.forEach((d, i) => {
+        d.classList.toggle("is-active", i === active);
+        d.setAttribute("aria-selected", String(i === active));
+      });
+      if (caption) caption.textContent = slides[active].dataset.caption || "";
+    };
+
+    const start = () => {
+      if (reduceMotion || slides.length < 2) return;
+      stop();
+      timer = setInterval(() => show(active + 1), 3000);
+    };
+    const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", () => { show(i); start(); });
+    });
+    heroCarousel.addEventListener("mouseenter", stop);
+    heroCarousel.addEventListener("mouseleave", start);
+    heroCarousel.addEventListener("focusin", stop);
+    heroCarousel.addEventListener("focusout", start);
+
+    start();
+  }
+
   /* ---------- Fluid island menu ---------- */
   const burger = $(".burger");
   const menu = $("#menu");
@@ -328,21 +365,35 @@
         return;
       }
       const f = Object.fromEntries(new FormData(form).entries());
-      const subject = `Freight quote: ${f.from} to ${f.to} (${f.type})`;
-      const body = [
-        `Name: ${f.name}`, f.company ? `Company: ${f.company}` : "", `Mobile: ${f.phone}`, `Email: ${f.email}`,
-        `Pickup: ${f.from}`, `Delivery: ${f.to}`, `Load type: ${f.type}`, f.message ? `\nCargo details:\n${f.message}` : "",
-      ].filter(Boolean).join("\n");
+      f.subject = `Freight quote: ${f.from} to ${f.to} (${f.type})`;
 
       btn.classList.add("is-loading"); btn.disabled = true;
-      $("span", btn).textContent = "Preparing your request";
-      setTimeout(() => {
-        window.location.href = `mailto:bng@shekhawatilogistics.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        btn.classList.remove("is-loading"); btn.disabled = false;
-        $("span", btn).textContent = "Get a freight quote";
-        status.classList.add("is-ok");
-        status.innerHTML = 'Your email app is opening with the request filled in. If nothing opens, call <a class="mono" href="tel:+919008898260">+91 9008898260</a> or write to <a href="mailto:bng@shekhawatilogistics.com">bng@shekhawatilogistics.com</a>.';
-      }, 700);
+      $("span", btn).textContent = "Sending your request";
+
+      fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(f),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          btn.classList.remove("is-loading"); btn.disabled = false;
+          $("span", btn).textContent = "Get a freight quote";
+          if (data.success) {
+            form.reset();
+            status.classList.add("is-ok");
+            status.innerHTML = 'Thanks! Your request has been sent. We will call you back shortly, or reach us now on <a class="mono" href="tel:+919008898260">+91 9008898260</a>.';
+          } else {
+            status.classList.add("is-err");
+            status.innerHTML = `Something went wrong sending your request. Please call <a class="mono" href="tel:+919008898260">+91 9008898260</a> or write to <a href="mailto:bng@shekhawatilogistics.com">bng@shekhawatilogistics.com</a>.`;
+          }
+        })
+        .catch(() => {
+          btn.classList.remove("is-loading"); btn.disabled = false;
+          $("span", btn).textContent = "Get a freight quote";
+          status.classList.add("is-err");
+          status.innerHTML = `Could not reach the server. Please call <a class="mono" href="tel:+919008898260">+91 9008898260</a> or write to <a href="mailto:bng@shekhawatilogistics.com">bng@shekhawatilogistics.com</a>.`;
+        });
     });
   }
 
